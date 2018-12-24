@@ -1,7 +1,9 @@
 package com.niit.BackendProject.Model;
 
 import java.util.List;
+import java.util.UUID;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -20,12 +22,27 @@ public class Cart
 	private String cartId;
 	private Integer TotalItems;
 	private Double GrandTotal;
-	
-	@OneToOne(mappedBy="cart")
+	public Cart()
+	{
+		this.cartId="Cart"+UUID.randomUUID().toString().substring(30).toUpperCase();
+	}
+	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="userId")
 	private User user;
 	
-	@OneToMany(mappedBy="Cart")
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	public List<CartItems> getCartItems() {
+		return cartItems;
+	}
+	public void setCartItems(List<CartItems> cartItems) {
+		this.cartItems = cartItems;
+	}
+	@OneToMany
 	private List<CartItems> cartItems;
 	
 	public String getCartId() {

@@ -2,8 +2,11 @@ package com.niit.BackendProject.Model;
 
  
 import java.util.List;
+import java.util.UUID;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -24,17 +27,41 @@ public class User
 	private String phoneNo;
 	private String emailIid;
 	private String password;
-	
-	@OneToOne(mappedBy="user")
+	public User() 
+	{
+		this.userId="User"+UUID.randomUUID().toString().substring(30).toUpperCase();
+	}
+	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="cartId")
 	private Cart cart;
+	
+	public Cart getCart() {
+		return cart;
+	}
+	public void setCart(Cart cart) {
+		this.cart = cart;
+	}
 	
 	@OneToMany(mappedBy="user")
 	private List<Shipping> shipping;
 	
-	@OneToOne(mappedBy="user")
+	public List<Shipping> getShipping() {
+		return shipping;
+	}
+	public void setShipping(List<Shipping> shipping) {
+		this.shipping = shipping;
+	}
+	
+	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="billId")
 	private Billing billing;
+	
+	public Billing getBilling() {
+		return billing;
+	}
+	public void setBilling(Billing billing) {
+		this.billing = billing;
+	}
 	
 	public String getUserId() {
 		return userId;

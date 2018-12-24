@@ -1,6 +1,7 @@
 package com.niit.BackendProject.Model;
 
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -18,10 +19,19 @@ public class Order
 	private String orderId;
 	private Double Grand_Total;
 	private Integer Total_Items;
-	
+	public Order() 
+	{
+		this.orderId="Order"+UUID.randomUUID().toString().substring(30).toUpperCase();
+	}
 	@OneToMany(mappedBy="order")
 	private List<OrderItems> orderItems;
 	
+	public List<OrderItems> getOrderItems() {
+		return orderItems;
+	}
+	public void setOrderItems(List<OrderItems> orderItems) {
+		this.orderItems = orderItems;
+	}
 	public String getOrderId() {
 		return orderId;
 	}
@@ -39,6 +49,18 @@ public class Order
 	}
 	public void setTotal_Items(Integer total_Items) {
 		Total_Items = total_Items;
+	}
+	public void setBilling(Billing billing) {
+		// TODO Auto-generated method stub
+		
+	}
+	public void setShipping(Shipping shipping) {
+		// TODO Auto-generated method stub
+		
+	}
+	public void setUser(User user) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

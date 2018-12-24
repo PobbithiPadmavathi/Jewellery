@@ -1,12 +1,17 @@
 package com.niit.BackendProject.Model;
 
+import java.util.UUID;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.servlet.annotation.MultipartConfig;
 
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Table
@@ -20,6 +25,19 @@ public class Product
 	private Integer quantity;
 	private String description;
 	
+	@Transient
+	private MultipartFile pimg;
+	
+	public MultipartFile getPimg() {
+		return pimg;
+	}
+	public void setPimg(MultipartFile pimg) {
+		this.pimg = pimg;
+	}
+	public Product() 
+	{
+		this.prodId="Prod"+UUID.randomUUID().toString().substring(30).toUpperCase();
+	}
 	@ManyToOne
 	@JoinColumn(name="catId")//this name same as in Category class
 	private Category category;
@@ -58,6 +76,18 @@ public class Product
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	public Category getCategory() {
+		return category;
+	}
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+	public Supplier getSupplier() {
+		return supplier;
+	}
+	public void setSupplier(Supplier supplier) {
+		this.supplier = supplier;
 	}
 	
 	

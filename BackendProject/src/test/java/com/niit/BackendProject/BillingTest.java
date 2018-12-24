@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.niit.BackendProject.Dao.BillingDao;
+import com.niit.BackendProject.Dao.UserDao;
 import com.niit.BackendProject.Model.Billing;
+import com.niit.BackendProject.Model.User;
 
 public class BillingTest 
 {
@@ -18,10 +20,16 @@ public class BillingTest
 		Billing bill=(Billing)ctx.getBean("billing");
 		BillingDao billDao=(BillingDao)ctx.getBean("billingDao");
 		
+		User user=(User)ctx.getBean("user");
+		UserDao userDao=(UserDao)ctx.getBean("userDao");
+		
 		bill.setBillId("B1");
 		bill.setBillName("abc");
 		bill.setAddress("Big Bazar");
 		bill.setPhNo("9876523456");
+		
+		user=userDao.getUser("u2");
+		bill.setUser(user);
 		
 		if(billDao.saveorupdate(bill)==true)
 		{

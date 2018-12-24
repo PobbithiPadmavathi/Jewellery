@@ -59,5 +59,18 @@ public class BillingDaoImpl implements BillingDao
 									.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 		return lists;
 	}
+
+	@Override
+	public Billing getUser(String userId) 
+	{
+		String q1="from Billing where userId='"+userId+"'";
+		Query w=sessionFactory.getCurrentSession().createQuery(q1);
+		List<Billing> list=(List<Billing>)w.list();
+		if(list==null || list.isEmpty())
+		{
+			return null;
+		}
+		return list.get(0);
+	}
 	
 }

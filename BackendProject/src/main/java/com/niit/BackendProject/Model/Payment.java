@@ -1,5 +1,7 @@
 package com.niit.BackendProject.Model;
 
+import java.util.UUID;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -15,6 +17,11 @@ public class Payment
 	private String payId;
 	private String method;
 	private String status;
+	public Payment() 
+	{
+		this.payId="Pay"+UUID.randomUUID().toString().substring(30).toUpperCase();
+	}
+	
 	public String getPayId() {
 		return payId;
 	}

@@ -1,5 +1,8 @@
 package com.niit.BackendProject.Model;
 
+import java.util.UUID;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -19,10 +22,21 @@ public class Billing
 	private String address;
 	private String phNo;
 	
-	@OneToOne(mappedBy="billing")
+	public Billing()
+	{
+		this.billId="Bill"+UUID.randomUUID().toString().substring(30).toUpperCase();
+	}
+	
+	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="userId")
 	private User user;
 	
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
 	public String getBillId() {
 		return billId;
 	}
@@ -46,6 +60,10 @@ public class Billing
 	}
 	public void setPhNo(String phNo) {
 		this.phNo = phNo;
+	}
+	public char[] getCountry() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

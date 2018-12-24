@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import com.niit.BackendProject.Dao.OrderDao;
 import com.niit.BackendProject.Dao.OrderItemsDao;
+import com.niit.BackendProject.Model.Order;
 import com.niit.BackendProject.Model.OrderItems;
 
 public class OrderItemsTest
@@ -18,8 +20,15 @@ public class OrderItemsTest
 		OrderItems orderItems=(OrderItems)ctx.getBean("orderItems");
 		OrderItemsDao orderItemsDao=(OrderItemsDao)ctx.getBean("orderItemsDao");
 		
+		Order order=(Order)ctx.getBean("order");
+		OrderDao orderDao=(OrderDao)ctx.getBean("orderDao");
+			
 		orderItems.setOrderItemId("ot1");
 		orderItems.setPrice(45000.00);
+		
+		order=orderDao.getOrder("o1");
+		orderItems.setOrder(order);
+		
 		if(orderItemsDao.saveorupdate(orderItems)==true)
 		{
 			System.out.println("OrderItems  Details saved");

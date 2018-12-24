@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.niit.BackendProject.Dao.ShippingDao;
+import com.niit.BackendProject.Dao.UserDao;
 import com.niit.BackendProject.Model.Shipping;
+import com.niit.BackendProject.Model.User;
 
 public class ShippingTest 
 {
@@ -18,10 +20,16 @@ public class ShippingTest
 		Shipping ship=(Shipping)ctx.getBean("shipping");
 		ShippingDao shipDao=(ShippingDao)ctx.getBean("shippingDao");
 		
+		User user=(User)ctx.getBean("user");
+		UserDao userDao=(UserDao)ctx.getBean("userDao");
+		
 		ship.setShipId("Sh1");
 		ship.setShipName("Vizag Port");
 		ship.setAddress("Vizag,AP");
 		ship.setPhno("7895437612");
+		
+		user=userDao.getUser("u2");
+		ship.setUser(user);
 		
 		if(shipDao.saveorupdate(ship)==true)
 		{

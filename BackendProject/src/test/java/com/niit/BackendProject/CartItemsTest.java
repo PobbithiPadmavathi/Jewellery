@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import com.niit.BackendProject.Dao.CartDao;
 import com.niit.BackendProject.Dao.CartItemsDao;
+import com.niit.BackendProject.Model.Cart;
 import com.niit.BackendProject.Model.CartItems;
 
 
@@ -20,8 +22,15 @@ public class CartItemsTest
 		CartItems cartItems=(CartItems)ctx.getBean("cartItems");
 		CartItemsDao cartItemsDao=(CartItemsDao)ctx.getBean("cartItemsDao");
 		
+		Cart cart=(Cart)ctx.getBean("cart");
+		CartDao cartDao=(CartDao)ctx.getBean("cartDao");
+		
 		cartItems.setCartItemId("ct101");
 		cartItems.setPrice(25000.00);
+		
+		cart=cartDao.getCart("c13");
+		cartItems.setCart(cart);
+		
 		if(cartItemsDao.saveorupdate(cartItems)==true)
 		{
 			System.out.println("Cart Deatils are saved");

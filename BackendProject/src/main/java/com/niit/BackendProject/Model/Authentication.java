@@ -1,5 +1,7 @@
 package com.niit.BackendProject.Model;
 
+import java.util.UUID;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -15,6 +17,12 @@ public class Authentication
 	private String auth_Id;
 	private String roleName="ROLE_USER";
 	private String userName;
+	
+	public Authentication()
+	{
+		this.auth_Id="Auth"+UUID.randomUUID().toString().substring(30).toUpperCase();
+	}
+	
 	public String getAuth_Id() {
 		return auth_Id;
 	}

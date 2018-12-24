@@ -1,5 +1,7 @@
 package com.niit.BackendProject.Model;
 
+import java.util.UUID;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -18,11 +20,20 @@ public class Shipping
 	private String shipName;
 	private String address;
 	private String phno;
-	
+	public Shipping() 
+	{
+		this.shipId="Ship"+UUID.randomUUID().toString().substring(30).toUpperCase();
+	}
 	@ManyToOne
 	@JoinColumn(name="userId")
 	private User user;
 	
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
 	public String getShipId() {
 		return shipId;
 	}

@@ -4,8 +4,12 @@ import java.util.List;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import com.niit.BackendProject.Dao.CategoryDao;
 import com.niit.BackendProject.Dao.ProductDao;
+import com.niit.BackendProject.Dao.SupplierDao;
+import com.niit.BackendProject.Model.Category;
 import com.niit.BackendProject.Model.Product;
+import com.niit.BackendProject.Model.Supplier;
 
 
 public class ProductTest 
@@ -18,12 +22,24 @@ public class ProductTest
 		
 		Product prod=(Product)ctx.getBean("product");
 		ProductDao prodDao=(ProductDao)ctx.getBean("productDao");
-	
+		
+		Category cat=(Category)ctx.getBean("category");
+		CategoryDao catDao=(CategoryDao)ctx.getBean("categoryDao");
+		
+		Supplier sup=(Supplier)ctx.getBean("supplier");
+		SupplierDao supDao=(SupplierDao)ctx.getBean("supplierDao");
+		
 		prod.setProdId("p1001");
 		prod.setProdName("Electic Kettle");
 		prod.setQuantity(2);
 		prod.setPrice(1500.00);
 		prod.setDescription("Using to heat small items");
+		
+		cat=catDao.getCategory("c101");
+		prod.setCategory(cat);
+		
+		sup=supDao.getSuplier("s1");
+		prod.setSupplier(sup);
 		
 		if(prodDao.saveorupdate(prod)==true)
 		{

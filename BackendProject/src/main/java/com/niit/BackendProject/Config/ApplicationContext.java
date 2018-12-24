@@ -61,7 +61,7 @@ public class ApplicationContext
 	{
 		DriverManagerDataSource dataSource=new DriverManagerDataSource();
 		dataSource.setDriverClassName("org.h2.Driver");
-		dataSource.setUrl("jdbc:h2:tcp://localhost/~/test/BackendProject");
+		dataSource.setUrl("jdbc:h2:tcp://localhost/~/test/Jewellary");
 		dataSource.setUsername("padma");
 		dataSource.setPassword("padhu");
 		return dataSource;

@@ -4,7 +4,11 @@ import java.util.List;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import com.niit.BackendProject.Dao.BillingDao;
+import com.niit.BackendProject.Dao.CartDao;
 import com.niit.BackendProject.Dao.UserDao;
+import com.niit.BackendProject.Model.Billing;
+import com.niit.BackendProject.Model.Cart;
 import com.niit.BackendProject.Model.User;
 
 public class UserTest 
@@ -18,12 +22,24 @@ public class UserTest
 		User user=(User)ctx.getBean("user");
 		UserDao userDao=(UserDao)ctx.getBean("userDao");
 		
+		Cart cart=(Cart)ctx.getBean("cart");
+		CartDao cartDao=(CartDao)ctx.getBean("cartDao");
+		
+		Billing bill=(Billing)ctx.getBean("billing");
+		BillingDao billDao=(BillingDao)ctx.getBean("billingDao");
+		
 		user.setUserId("u1");
 		user.setUserName("Padmakar");
 		user.setAddress("Guntakal,AP");
 		user.setPhoneNo("+91 9494788819");
 		user.setEmailIid("kksilverpadma1999@gmail.com");
 		user.setPassword("silver1999");
+		
+		cart=cartDao.getCart("c14");
+		user.setCart(cart);
+		
+		bill=billDao.getBilling("B1");
+		user.setBilling(bill);
 		
 		if(userDao.saveorupdate(user)==true)
 		{

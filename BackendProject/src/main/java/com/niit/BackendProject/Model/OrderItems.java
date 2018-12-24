@@ -2,6 +2,8 @@ package com.niit.BackendProject.Model;
 
 
 
+import java.util.UUID;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -19,11 +21,20 @@ public class OrderItems
 	@Id
 	private String orderItemId;
 	private Double price;
-	
+	public OrderItems() 
+	{
+		this.orderItemId="OrderItems"+UUID.randomUUID().toString().substring(30).toUpperCase();
+	}
 	@ManyToOne
 	@JoinColumn(name="orderId")
 	private Order order;
 	
+	public Order getOrder() {
+		return order;
+	}
+	public void setOrder(Order order) {
+		this.order = order;
+	}
 	public String getOrderItemId() {
 		return orderItemId;
 	}
@@ -35,6 +46,10 @@ public class OrderItems
 	}
 	public void setPrice(Double price) {
 		this.price = price;
+	}
+	public void setProdId(String prodId) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
