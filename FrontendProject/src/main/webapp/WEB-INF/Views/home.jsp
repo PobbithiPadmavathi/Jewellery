@@ -9,6 +9,7 @@
 <c:url value="/resources/css" var="css"></c:url>
 <c:url value="/resources/js" var="js"></c:url>
 <c:url value="/resources/images" var="images"></c:url>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <meta charset="UTF-8">
 <title>Golden Jewellery</title>
 
@@ -53,6 +54,7 @@
 				<c1:if test="${pageContext.request.userPrincipal.name!=null}">
 	   			<li><a href="<c:url value="/j_spring_security_logout"/>">Logout</a></li>
 	   			</c1:if>
+	   			<li><a href="<c:url value="/viewcart"/>"><i class="fa fa-shopping-cart">${items}</i></a></li>
 			</ul>
 		</nav>
 
@@ -62,7 +64,7 @@
 					<h1>Golden Jewellery</h1>
 					<h2>24 Caratage Yellow Gold Bracelet</h2>
 					<p>Shope the latest designs from new brands</p>
-					<a href="">- View Products</a>
+					<a href="<c:url value="/gallery"/>">- View Products</a>
 				</div>
 			</div>
 		</div>
@@ -86,7 +88,7 @@
 					<h2>
 						New <br />Collection
 					</h2>
-					<a href="#home">View products</a>
+					<a href="<c:url value="/gallery"/>">View products</a>
 				</div>
 				<!-- / mid-title -->
 			</div>
@@ -218,7 +220,7 @@
 
 	<footer>
 		<div class="container">
-			<small>&copy; 2017 Golden Jewelry | Coded By Jak Ashuraliev</small>
+			
 		</div>
 	</footer>
 	<script

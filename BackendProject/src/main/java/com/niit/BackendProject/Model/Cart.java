@@ -20,8 +20,8 @@ public class Cart
 {
 	@Id
 	private String cartId;
-	private Integer TotalItems;
-	private Double GrandTotal;
+	private Integer TotalItems=0;
+	private Double GrandTotal=0.0;
 	public Cart()
 	{
 		this.cartId="Cart"+UUID.randomUUID().toString().substring(30).toUpperCase();

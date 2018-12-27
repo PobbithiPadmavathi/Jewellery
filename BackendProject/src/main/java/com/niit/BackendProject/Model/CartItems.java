@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -22,7 +23,16 @@ public class CartItems
 	{
 		this.cartItemId="CartItems"+UUID.randomUUID().toString().substring(30).toUpperCase();
 	}
+	@OneToOne
+	@JoinColumn(name="product")
+	private Product product;
 	
+	public Product getProduct() {
+		return product;
+	}
+	public void setProduct(Product product) {
+		this.product = product;
+	}
 	@ManyToOne
 	@JoinColumn(name="cartId")
 	private Cart cart;
@@ -45,9 +55,6 @@ public class CartItems
 	public void setPrice(Double price) {
 		this.price = price;
 	}
-	public Product getProd() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 	
 }

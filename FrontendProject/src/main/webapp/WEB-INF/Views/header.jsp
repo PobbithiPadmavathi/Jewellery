@@ -31,15 +31,30 @@
 		</div>
 		<!-- / container -->
 
+	
 		<nav>
 			<ul>
-				<li><a href="#home">Home</a></li>
-				<li><a href="#designer-sec">Designer Jewellery</a></li>
+				<li><a href="<c:url value="/"/>">Home</a></li>
+				<li><a href="<c:url value="/"/>">Designer Jewellery</a></li>
+				<c1:if test="${pageContext.request.userPrincipal.name!=null}">
+	  			 <security:authorize access="hasRole('ROLE_ADMIN')">
 				<li><a href="<c:url value="/Category"/>">Category</a></li>
 				<li><a href="<c:url value="/Product"/>">Product</a></li>
 				<li><a href="<c:url value="/Supplier"/>">Supplier</a></li>
-				<li><a href="#about">About</a></li>
-				<li><a href="#contact">Contact</a></li>
+				</security:authorize>
+				</c1:if>
+				
+				<li><a href="<c:url value="/"/>">About</a></li>
+				<li><a href="<c:url value="/"/>">Contact</a></li>
+				<c1:if test="${pageContext.request.userPrincipal.name==null}">
+	   			<li><a href="<c:url value="/login"/>">Login</a></li>
+	   			<li><a href="<c:url value="/user"/>">Signup</a></li>
+	   			</c1:if>
+				<c1:if test="${pageContext.request.userPrincipal.name!=null}">
+	   			<li><a href="<c:url value="/j_spring_security_logout"/>">Logout</a></li>
+	   			</c1:if>
+	   			<li><a href="<c:url value="/viewcart"/>"><i class="fa fa-shopping-cart"></i></a></li>
+			
 			</ul>
 		</nav>
 </header>

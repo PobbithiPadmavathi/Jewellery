@@ -10,4 +10,5 @@ public interface ProductDao
 	public boolean delete(Product product);
 	public Product getProd(String prodId);
 	public List<Product> prodList();
+	
 }

@@ -30,6 +30,31 @@ description:<form:input type="text" name="description" path="description"/><br>
 
 <form:input type="file" value="uploadfile" path="pimg"/>
 
+<div class="form-group">
+	<label for="cat">Category
+	<font  color="#000000">
+	<form:select path="category.catId" multiple="false">
+	<c1:forEach items="${categories}" var="d">
+	<form:option value="${d.getCatId()} " label="${d.getCatName()}"/>
+	</c1:forEach>
+	</form:select>
+	</font>
+	</label>
+</div>
+
+<div class="form-group">
+	<label for="cat">Supplier
+	<font  color="#000000">
+	<form:select path="supplier.supId" multiple="false">
+	<c1:forEach items="${suppliers}" var="s">
+	<form:option value="${s.getSupId()}" label="${s.getSupName()}"/>
+	</c1:forEach>
+	</form:select>
+	</font>
+	</label>
+</div>
+
+
 <input type="submit" value="AddProduct">
 <input type="reset" value="cancel">
 

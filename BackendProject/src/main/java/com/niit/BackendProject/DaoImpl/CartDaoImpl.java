@@ -45,8 +45,9 @@ public class CartDaoImpl implements CartDao
 		String qry="from Cart where cartId='"+ cartId +"'";
 		Query w=sessionFactory.getCurrentSession().createQuery(qry);
 		List<Cart> list=(List<Cart>)w.list();
-		if(list==null)
+		 if(list==null||list.isEmpty())
 		{
+			System.out.println("Cart not found");
 			return null;
 		}
 		return list.get(0);
@@ -59,5 +60,6 @@ public class CartDaoImpl implements CartDao
 								.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 		return cartLists;
 	}
-
+	
+	
 }

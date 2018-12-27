@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,17 +16,20 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.niit.BackendProject.Dao.CartDao;
 import com.niit.BackendProject.Dao.CartItemsDao;
+import com.niit.BackendProject.Dao.ProductDao;
 import com.niit.BackendProject.Dao.UserDao;
 import com.niit.BackendProject.Model.Cart;
 import com.niit.BackendProject.Model.CartItems;
+import com.niit.BackendProject.Model.Product;
 import com.niit.BackendProject.Model.User;
 
+@Controller
 public class CartController
 {
 //	Product product;
 //	@Autowired 
 //	ProductDao productDao;
-//	
+	
 	@Autowired 
 	User user;
 	@Autowired 
@@ -42,29 +46,32 @@ public class CartController
 	CartItemsDao cartItemsDao;
 	
 	@Autowired
+	ProductDao productDao;
+	
+	@Autowired
 	HttpSession session;
 	
-	@RequestMapping("/addtocart/{id}")
-	public ModelAndView cart(@PathVariable("id") String id) 
+	@RequestMapping("/addtocart/{prodId}")
+	public ModelAndView cart(@PathVariable("prodId") String id) 
 	{
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (!(authentication instanceof AnonymousAuthenticationToken)) {
 			String currusername = authentication.getName();
 	User u = userDao.getUseremail(currusername);
-	if (user == null)
+	if (u == null)
 	{
-		return new ModelAndView("redirect:/");
+		return new ModelAndView("redirect:/");// not valid user redirect to home page
 	} 
 	else
 	{
 		cart = u.getCart();
-//		Product product1 = productDao.get(id);
+		Product product1 = productDao.getProd(id);
 		CartItems cartItem = new CartItems();
 		cartItem.setCart(cart);
-//		cartItem.setProduct(product1);
-//		cartItem.setPrice(product1.getPrice());
+		cartItem.setProduct(product1);
+		cartItem.setPrice(product1.getPrice());
 		cartItemsDao.saveorupdate(cartItem);
-//		cart.setGrandtotal(cart.getGrandtotal() + product1.getPrice());
+		cart.setGrandTotal(cart.getGrandTotal() + product1.getPrice());
 		cart.setTotalItems(cart.getTotalItems() + 1);
 		cartDao.saveorupdate(cart);
 		session.setAttribute("items", cart.getTotalItems());
@@ -108,8 +115,8 @@ public class CartController
 //		}
 	}
 	
-	@RequestMapping(value="/Remove/{carId}")
-	public ModelAndView RemoveFromCart(@PathVariable("carId") String id)
+	@RequestMapping(value="/Remove/{cartItemsId}")
+	public ModelAndView RemoveFromCart(@PathVariable("cartItemsId") String id)
 	{
 		ModelAndView obj= new ModelAndView("redirect:/viewcart");
 		cartItems=cartItemsDao.get(id);
@@ -118,7 +125,7 @@ public class CartController
 		c.setTotalItems(c.getTotalItems()-1);
 		cartDao.saveorupdate(c);
 		
-		cartItemsDao.delete(cartItems);
+		cartItemsDao.delete(id);
 		return obj;
 	}
 	
@@ -134,7 +141,7 @@ public class CartController
 		List<CartItems> cartItems=cartItemsDao.getCartItemsList(u.getCart().getCartId());
 		for(CartItems g:cartItems)
 		{
-			cartItemsDao.delete(g);
+			cartItemsDao.delete(g.getCartItemId());
 		}
 		c.setGrandTotal(0.0);;
 		c.setTotalItems(0);
@@ -147,7 +154,6 @@ public class CartController
 			return "redirect:/";
 		}
 	}
-	
 //	@RequestMapping("/addtocartR/{p_id}")
 //	public ModelAndView cart(@PathVariable("p_id") String id) {
 //

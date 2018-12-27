@@ -70,7 +70,7 @@ public class UserDaoImpl implements UserDao
 		return users;
 	}
 
-	@Override
+
 	public User isValid(String emailid, String password) 
 	{
 		String qry="from User where emilId='"+emailid+ "'password='"+password+"'";
@@ -83,10 +83,10 @@ public class UserDaoImpl implements UserDao
 		return list.get(0);
 	}
 
-	@Override
+	
 	public User getUseremail(String currusername)
 	{
-		String q1="from User where currusername='"+currusername+"'";
+		String q1="from User where emailIid='"+currusername+"'";
 		Query w=sessionFactory.getCurrentSession().createQuery(q1);
 		List<User> list=(List<User>)w.list();
 		if(list==null || list.isEmpty())

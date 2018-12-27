@@ -34,9 +34,11 @@ public class CartItemsDaoImpl implements  CartItemsDao
 	}
 
 	
-	public boolean delete(CartItems cartItems)
+	public boolean delete(String cartItemId)
 	{
-		sessionFactory.getCurrentSession().delete(cartItems);
+		CartItems c =new CartItems();
+		c.setCartItemId(cartItemId);
+		sessionFactory.getCurrentSession().delete(c);
 		return true;
 	}
 
@@ -83,6 +85,18 @@ public class CartItemsDaoImpl implements  CartItemsDao
 	public CartItems get(String id) 
 	{
 		String sql="from CartItems where id='"+id+"'";
+		Query q=sessionFactory.getCurrentSession().createQuery(sql);
+		List<CartItems> list=(List<CartItems>)q.list();
+		if(list==null || list.isEmpty())
+		{
+			return null;
+		}
+		return list.get(0);
+	}
+
+	@Override
+	public CartItems getlistall(String cartId, String prodId) {
+		String sql="from CartItems where cartId='"+cartId+"' and prodId='"+prodId+"'";
 		Query q=sessionFactory.getCurrentSession().createQuery(sql);
 		List<CartItems> list=(List<CartItems>)q.list();
 		if(list==null || list.isEmpty())
