@@ -33,16 +33,15 @@ public class CartItemsDaoImpl implements  CartItemsDao
 		return true;
 	}
 
-	
-	public boolean delete(String cartItemId)
-	{
+	@Override
+	public boolean delete(String cartItemId) {
 		CartItems c =new CartItems();
 		c.setCartItemId(cartItemId);
 		sessionFactory.getCurrentSession().delete(c);
 		return true;
 	}
 
-
+	
 	public CartItems getCartItems(String cartItemId) 
 	{
 		String qry="from CartItems where cartItemId='"+ cartItemId +"'";
@@ -64,9 +63,9 @@ public class CartItemsDaoImpl implements  CartItemsDao
 	}
 
 	@Override
-	public List<CartItems> getCartItemsList(String cartId) 
+	public List<CartItems> getCartItemsList(String CartId) 
 	{
-		String sql="from CartItems where cartId='"+cartId+"'"; 
+		String sql="from CartItems where CartId='"+CartId+"'"; 
 		Query q1=sessionFactory.getCurrentSession().createQuery(sql);
 		List<CartItems> list=(List<CartItems>)q1.list();
 		if(list==null || list.isEmpty())
@@ -106,4 +105,5 @@ public class CartItemsDaoImpl implements  CartItemsDao
 		return list.get(0);
 	}
 
+	
 }

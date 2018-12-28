@@ -3,9 +3,12 @@ package com.niit.BackendProject.Model;
 import java.util.List;
 import java.util.UUID;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -50,18 +53,34 @@ public class Order
 	public void setTotal_Items(Integer total_Items) {
 		Total_Items = total_Items;
 	}
+	@OneToOne
+	@JoinColumn(name="billId")
+	private Billing billing;
+	public Billing getBilling() {
+		return billing;
+	}
 	public void setBilling(Billing billing) {
-		// TODO Auto-generated method stub
-		
+		this.billing = billing;
+	}
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="shipId")
+	private Shipping shipping;
+	public Shipping getShipping() {
+		return shipping;
 	}
 	public void setShipping(Shipping shipping) {
-		// TODO Auto-generated method stub
-		
+		this.shipping = shipping;
+	}
+	@OneToOne
+	@JoinColumn(name="userId")
+	private User user;
+	public User getUser() {
+		return user;
 	}
 	public void setUser(User user) {
-		// TODO Auto-generated method stub
-		
+		this.user = user;
 	}
+	
 	
 	
 }

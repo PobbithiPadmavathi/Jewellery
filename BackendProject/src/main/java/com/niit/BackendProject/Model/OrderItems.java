@@ -21,6 +21,7 @@ public class OrderItems
 	@Id
 	private String orderItemId;
 	private Double price;
+	private String prodId;
 	public OrderItems() 
 	{
 		this.orderItemId="OrderItems"+UUID.randomUUID().toString().substring(30).toUpperCase();
@@ -47,9 +48,11 @@ public class OrderItems
 	public void setPrice(Double price) {
 		this.price = price;
 	}
+	public String getProdId() {
+		return prodId;
+	}
 	public void setProdId(String prodId) {
-		// TODO Auto-generated method stub
-		
+		this.prodId = prodId;
 	}
 	
 }

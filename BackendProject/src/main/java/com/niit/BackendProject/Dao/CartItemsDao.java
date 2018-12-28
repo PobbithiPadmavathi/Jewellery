@@ -13,4 +13,6 @@ public interface CartItemsDao
 	public List<CartItems> getCartItemsList(String cartId);
 	public CartItems get(String id);
 	public CartItems getlistall(String cartId, String prodId);
+	
+	
 }

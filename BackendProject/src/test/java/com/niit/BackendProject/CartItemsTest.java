@@ -94,7 +94,7 @@
 //		else
 //		{
 //			System.out.println("CartItems Details Deleting...");
-//			if(cartItemsDao.delete(cartItems)==true)
+//			if(cartItemsDao.delete(cartItemId)==true)
 //			{
 //				System.out.println("CartItems Details Deleted");
 //			}
